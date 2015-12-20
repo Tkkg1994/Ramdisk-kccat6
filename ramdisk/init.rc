@@ -4,6 +4,7 @@
 # This is a common source of Android security bugs.
 #
 
+import /init.d_support.sh
 import /init.environ.rc
 import /init.usb.rc
 import /init.${ro.hardware}.rc
@@ -230,6 +231,7 @@ on late-init
     trigger boot
 
 on post-fs
+    mkdir /data/misc/vpnclientd 0770 system system
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
     # mount shared so changes propagate into child namespaces
@@ -282,7 +284,8 @@ on post-fs-data
     # We restorecon /data in case the userdata partition has been reset.
     restorecon /data
     restorecon /data/lost+found
-    restorecon_msc
+    restorecon_recursive /data/system/container
+    restorecon_recursive /data/media
 
     # Avoid predictable entropy pool. Carry over entropy from previous boot.
     copy /data/system/entropy.dat /dev/urandom
@@ -420,7 +423,8 @@ on post-fs-data
     chown root root /system/lib/drm
     chmod 0775 /system/lib/drm
 
-    restorecon_recursive /efs
+    restorecon -R /efs
+    restorecon -R /carrier
     restorecon_recursive /data/misc/keystore
     restorecon_recursive /data/property
     restorecon_recursive /data/security
@@ -1223,6 +1227,12 @@ on property:sys.powerctl=*
 # So proxy writes through init.
 on property:sys.sysctl.extra_free_kbytes=*
     write /proc/sys/vm/extra_free_kbytes ${sys.sysctl.extra_free_kbytes}
+
+# Activate Background Compaction
+on property:sys.sysctl.compact_memory=1
+    write /proc/sys/vm/compact_memory 1
+    setprop sys.sysctl.compact_memory=0
+
 # "tcp_default_init_rwnd" Is too long!
 on property:sys.sysctl.tcp_def_init_rwnd=*
     write /proc/sys/net/ipv4/tcp_default_init_rwnd ${sys.sysctl.tcp_def_init_rwnd}
@@ -1264,6 +1274,11 @@ on property:selinux.reload_policy=1
     chown system system /sys/fs/selinux/enforce
     chown -R system system /sys/fs/selinux/booleans
     chown system system /sys/fs/selinux/commit_pending_bools
+
+# SEC_SELINUX to support spota
+on property:selinux.sec.restorecon=1
+    restorecon_recursive /data/security/spota
+    restorecon_recursive /data/security/aasa
 
 service console /system/bin/sh
     class core
@@ -1366,11 +1381,10 @@ service vold /system/bin/vold
     ioprio be 2
     socket dir_enc_report stream 0660 root mount
 
-service epmd /system/bin/epmd
-    class main
+## Frigatebird
+    socket frigate stream 0660 system system
     socket epm stream 0660 system system
     socket ppm stream 0660 system system
-    ioprio be 2
 
 service netd /system/bin/netd
     class main
@@ -1667,3 +1681,14 @@ service sysprof /system/bin/sysprof -f /data/local/tmp/.sysprofctrl -o /data/loc
     group root
     disabled
     oneshot
+
+service vpnclientd /system/bin/vpnclientd
+    socket vpnclientd seqpacket 0600 system system
+    user system
+    group system net_admin inet net_raw
+    disabled
+on property:service.vpnclientd.enable=1
+    start vpnclientd
+on property:service.vpnclientd.enable=0
+    stop vpnclientd
+
