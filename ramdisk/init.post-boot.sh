@@ -75,41 +75,42 @@ chmod -R 0666 /sys/devices/system/cpu/cpu3/cpufreq/nightmare
 chmod 0755 /sys/devices/system/cpu/cpu3/cpufreq/nightmare
 
 # Nightmare Governor for Default
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/timer_rate
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/timer_rate
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/timer_slack
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/timer_slack
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/min_sample_time
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/min_sample_time
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/hispeed_freq
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/hispeed_freq
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/target_loads
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/target_loads
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/go_hispeed_load
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/go_hispeed_load
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/above_hispeed_delay
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/above_hispeed_delay
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/boost
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/boost
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/boostpulse
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/input_boost
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/input_boost
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/boostpulse_duration
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/boostpulse_duration
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/io_is_busy
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/io_is_busy
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/sampling_rate
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/sampling_rate
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_for_responsiveness
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_for_responsiveness
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/dec_cpu_load
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/dec_cpu_load
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_for_responsiveness_max
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_for_responsiveness_max
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_step
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_step
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_step_at_min_freq
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_step_at_min_freq
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_step_dec
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_step_dec
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_step_dec_at_max
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_step_dec_at_max
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_up_brake
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_up_brake
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_up_brake_at_min_freq
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_up_brake_at_min_freq
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/inc_cpu_load
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/inc_cpu_load
+chown system system /sys/devices/system/cpu/cpufreq/nightmare/inc_cpu_load_at_min_freq
+chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/inc_cpu_load_at_min_freq
 
 chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo "nightmare" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor # CPU0
+echo "nightmare" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 chmod -h 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-echo "nightmare" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor # CPU1
+echo "nightmare" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
 chmod -h 0664 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-echo "nightmare" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor # CPU2
+echo "nightmare" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 chmod -h 0664 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-echo "nightmare" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor # CPU3
+echo "nightmare" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
 chmod -h 0664 /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
 
 chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
