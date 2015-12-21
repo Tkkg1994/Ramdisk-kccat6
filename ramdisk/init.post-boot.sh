@@ -60,6 +60,18 @@ if [ -x /system/xbin/busybox ]; then
 	set_environment
 fi
 
+#Set CPU Min Frequencies
+echo 268800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo 268800 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+echo 268800 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+echo 268800 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+
+#Set CPU Max Frequencies
+echo 3072000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 3072000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+echo 3072000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+echo 3072000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+
 # Nightmare governor
 chown -R system:system /sys/devices/system/cpu/cpu0/cpufreq/nightmare
 chmod -R 0666 /sys/devices/system/cpu/cpu0/cpufreq/nightmare
