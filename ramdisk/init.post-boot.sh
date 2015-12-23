@@ -229,9 +229,9 @@ sleep 0.5s
 
 sync
 
-# Enable Dynamic FSync
+# Disable Dynamic FSync
 chmod 0777 /sys/kernel/dyn_fsync/Dyn_fsync_active
-echo "1" > /sys/kernel/dyn_fsync/Dyn_fsync_active
+echo "0" > /sys/kernel/dyn_fsync/Dyn_fsync_active
 chmod 0664 /sys/kernel/dyn_fsync/Dyn_fsync_active
 
 # Enable Simple GPU algorithm.

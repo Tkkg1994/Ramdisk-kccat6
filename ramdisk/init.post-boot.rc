@@ -1,8 +1,18 @@
 service post-boot /system/bin/sh /init.post-boot.sh
-     class late_start
-     user root
-     disabled
-     oneshot
+    class late_start
+    user root
+    disabled
+    oneshot
 
 on property:sys.boot_completed=1
-     start post-boot
+    # HMP scheduler load tracking settings
+    write /proc/sys/kernel/sched_ravg_hist_size 3
+
+    # HMP Task packing settings
+    write /proc/sys/kernel/sched_small_task 20
+
+    write /proc/sys/kernel/sched_window_stats_policy 2
+    write /proc/sys/kernel/sched_ravg_hist_size 5
+
+    # Begin with kernel script
+    start post-boot
