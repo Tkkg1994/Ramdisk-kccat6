@@ -5,14 +5,8 @@ service post-boot /system/bin/sh /init.post-boot.sh
     oneshot
 
 on property:sys.boot_completed=1
-    # HMP scheduler load tracking settings
-    write /proc/sys/kernel/sched_ravg_hist_size 3
+# Enable Power modes
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
-    # HMP Task packing settings
-    write /proc/sys/kernel/sched_small_task 20
-
-    write /proc/sys/kernel/sched_window_stats_policy 2
-    write /proc/sys/kernel/sched_ravg_hist_size 5
-
-    # Begin with kernel script
+# Begin with kernel script
     start post-boot
