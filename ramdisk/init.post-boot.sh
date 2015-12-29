@@ -67,10 +67,10 @@ echo 300000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
 echo 300000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
 
 #Set CPU Max Frequencies
-echo 2457600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-echo 2457600 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
-echo 2457600 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
-echo 2457600 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+echo 2496000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 2496000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+echo 2496000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+echo 2496000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
 
 #Set GPU Min Frequencies
 echo 240000000 > /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
@@ -240,10 +240,20 @@ chmod 0777 /sys/kernel/dyn_fsync/Dyn_fsync_active
 echo "0" > /sys/kernel/dyn_fsync/Dyn_fsync_active
 chmod 0664 /sys/kernel/dyn_fsync/Dyn_fsync_active
 
-# Enable Simple GPU algorithm.
+# Disable Simple GPU Algorithm
 chmod 0777 /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
-echo "1" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
+echo "0" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
 chmod 0664 /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
+
+# Enable Adreno Idler
+chmod 0777 /sys/module/adreno_idler/parameters/adreno_idler_active
+echo "1" > /sys/module/adreno_idler/parameters/adreno_idler_active
+chmod 0664 /sys/module/adreno_idler/parameters/adreno_idler_active
+
+# Disable State Notifier
+chmod 0777 /sys/module/state_notifier/parameters/enabled
+echo "0" > /sys/module/state_notifier/parameters/enabled
+chmod 0664 /sys/module/state_notifier/parameters/enabled
 
 # Debug level
 if [ -e /sys/module/lowmemorykiller/parameters/debug_level ]; then
