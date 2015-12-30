@@ -73,7 +73,7 @@ echo 2496000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
 echo 2496000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
 
 #Set GPU Min Frequencies
-echo 240000000 > /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
+echo 200000000 > /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
 
 #Set GPU Max Frequencies
 echo 600000000 > /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
@@ -222,7 +222,7 @@ sleep 0.2s
 busy=/sbin/busybox;
 
 # lmk tweaks for fewer empty background processes
-minfree=7628,9768,11909,14515,16655,20469;
+minfree=1024,2048,4096,8192,12288,16384;
 lmk=/sys/module/lowmemorykiller/parameters/minfree;
 minboot=`cat $lmk`;
 while sleep 1; do
@@ -254,6 +254,11 @@ chmod 0664 /sys/module/adreno_idler/parameters/adreno_idler_active
 chmod 0777 /sys/module/state_notifier/parameters/enabled
 echo "0" > /sys/module/state_notifier/parameters/enabled
 chmod 0664 /sys/module/state_notifier/parameters/enabled
+
+# Enable adaptive lmk
+chmod 0777 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+echo "1" > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+chmod 0664 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 
 # Debug level
 if [ -e /sys/module/lowmemorykiller/parameters/debug_level ]; then
