@@ -78,70 +78,98 @@ echo 200000000 > /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
 #Set GPU Max Frequencies
 echo 600000000 > /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
 
-# Nightmare governor
-chown -R system:system /sys/devices/system/cpu/cpu0/cpufreq/nightmare
-chmod -R 0666 /sys/devices/system/cpu/cpu0/cpufreq/nightmare
-chmod 0755 /sys/devices/system/cpu/cpu0/cpufreq/nightmare
-chown -R system:system /sys/devices/system/cpu/cpu1/cpufreq/nightmare
-chmod -R 0666 /sys/devices/system/cpu/cpu1/cpufreq/nightmare
-chmod 0755 /sys/devices/system/cpu/cpu1/cpufreq/nightmare
-chown -R system:system /sys/devices/system/cpu/cpu2/cpufreq/nightmare
-chmod -R 0666 /sys/devices/system/cpu/cpu2/cpufreq/nightmare
-chmod 0755 /sys/devices/system/cpu/cpu2/cpufreq/nightmare
-chown -R system:system /sys/devices/system/cpu/cpu3/cpufreq/nightmare
-chmod -R 0666 /sys/devices/system/cpu/cpu3/cpufreq/nightmare
-chmod 0755 /sys/devices/system/cpu/cpu3/cpufreq/nightmare
+# Interactive governor
+chown -R system:system /sys/devices/system/cpu/cpu0/cpufreq/interactive
+chmod -R 0666 /sys/devices/system/cpu/cpu0/cpufreq/interactive
+chmod 0755 /sys/devices/system/cpu/cpu0/cpufreq/interactive
+chown -R system:system /sys/devices/system/cpu/cpu1/cpufreq/interactive
+chmod -R 0666 /sys/devices/system/cpu/cpu1/cpufreq/interactive
+chmod 0755 /sys/devices/system/cpu/cpu1/cpufreq/interactive
+chown -R system:system /sys/devices/system/cpu/cpu2/cpufreq/interactive
+chmod -R 0666 /sys/devices/system/cpu/cpu2/cpufreq/interactive
+chmod 0755 /sys/devices/system/cpu/cpu2/cpufreq/interactive
+chown -R system:system /sys/devices/system/cpu/cpu3/cpufreq/interactive
+chmod -R 0666 /sys/devices/system/cpu/cpu3/cpufreq/interactive
+chmod 0755 /sys/devices/system/cpu/cpu3/cpufreq/interactive
 
-# Nightmare Governor for Default
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/sampling_rate
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/sampling_rate
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_for_responsiveness
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_for_responsiveness
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/dec_cpu_load
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/dec_cpu_load
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_for_responsiveness_max
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_for_responsiveness_max
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_step
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_step
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_step_at_min_freq
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_step_at_min_freq
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_step_dec
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_step_dec
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_step_dec_at_max
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_step_dec_at_max
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_up_brake
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_up_brake
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/freq_up_brake_at_min_freq
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/freq_up_brake_at_min_freq
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/inc_cpu_load
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/inc_cpu_load
-chown system system /sys/devices/system/cpu/cpufreq/nightmare/inc_cpu_load_at_min_freq
-chmod 0660 /sys/devices/system/cpu/cpufreq/nightmare/inc_cpu_load_at_min_freq
+# interactive Governor for Default
+chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+chown system system /sys/devices/system/cpu/cpufreq/interactive/bimc_hispeed_freq
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/bimc_hispeed_freq
+chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
+chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
+chown system system /sys/devices/system/cpu/cpufreq/interactive/enforced_mode
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/enforced_mode
+chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+chown system system /sys/devices/system/cpu/cpufreq/interactive/mode
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/mode
+chown system system /sys/devices/system/cpu/cpufreq/interactive/multi_enter_load
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/multi_enter_load
+chown system system /sys/devices/system/cpu/cpufreq/interactive/multi_enter_time
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/multi_enter_time
+chown system system /sys/devices/system/cpu/cpufreq/interactive/multi_exit_load
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/multi_exit_load
+chown system system /sys/devices/system/cpu/cpufreq/interactive/multi_exit_time
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/multi_exit_time
+chown system system /sys/devices/system/cpu/cpufreq/interactive/param_index
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/param_index
+chown system system /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
+chown system system /sys/devices/system/cpu/cpufreq/interactive/single_enter_load
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/single_enter_load
+chown system system /sys/devices/system/cpu/cpufreq/interactive/single_enter_time
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/single_enter_time
+chown system system /sys/devices/system/cpu/cpufreq/interactive/single_exit_load
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/single_exit_load
+chown system system /sys/devices/system/cpu/cpufreq/interactive/single_exit_time
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/single_exit_time
+chown system system /sys/devices/system/cpu/cpufreq/interactive/sync_freq
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/sync_freq
+chown system system /sys/devices/system/cpu/cpufreq/interactive/target_loads
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/target_loads
+chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_slack
+chown system system /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_freq
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_freq
+chown system system /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load
+chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load
 
 chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo "nightmare" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 chmod -h 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-echo "nightmare" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+echo "interactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
 chmod -h 0664 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-echo "nightmare" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 chmod -h 0664 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-echo "nightmare" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+echo "interactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
 chmod -h 0664 /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
 
 chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "nightmare"
+write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
 chmod -h 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "nightmare"
+write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
 chmod -h 0664 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "nightmare"
+write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
 chmod -h 0664 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
 chmod 777 /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "nightmare"
+write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
 chmod -h 0664 /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
  
 sleep 0.5s
