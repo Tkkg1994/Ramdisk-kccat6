@@ -61,16 +61,16 @@ if [ -x /system/xbin/busybox ]; then
 fi
 
 #Set CPU Min Frequencies
-echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo 300000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-echo 300000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-echo 300000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+echo 268800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo 268800 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+echo 268800 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+echo 268800 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
 
 #Set CPU Max Frequencies
-echo 2496000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-echo 2496000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
-echo 2496000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
-echo 2496000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+echo 2265600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 2265600 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+echo 2265600 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+echo 2265600 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
 
 #Set GPU Min Frequencies
 echo 200000000 > /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
@@ -182,17 +182,6 @@ sync
 # Initialice Zipalign
 /res/ext/zipalign.sh
 
-# Kernel panic setup
-if [ -e /proc/sys/kernel/panic_on_oops ]; then 
-	echo "0" > /proc/sys/kernel/panic_on_oops
-fi
-if [ -e /proc/sys/kernel/panic ]; then 
-	echo "0" > /proc/sys/kernel/panic
-fi
-if [ -e /proc/sys/vm/panic_on_oom ]; then 
-	 echo "0" > /proc/sys/vm/panic_on_oom
-fi
-
 # Fast Charge
 echo "1" > /sys/kernel/fast_charge/force_fast_charge
 
@@ -207,36 +196,6 @@ chmod 0664 /sys/module/lowmemorykiller/parameters/adj
 sync
 
 sleep 0.2s
-
-# IO_tweak
-LOOP=`ls -d /sys/block/loop* 2>/dev/null`
-RAM=`ls -d /sys/block/ram* 2>/dev/null`
-MMC=`ls -d /sys/block/mmc* 2>/dev/null`
-ZSWA=`ls -d /sys/block/vnswap* 2>/dev/null`
-for j in $LOOP $RAM $MMC $ZSWA
-do 
-	if [ -e $j/queue/rotational ]; then
-		echo "0" > $j/queue/rotational
-	fi
-	if [ -e $j/queue/iostats ]; then
-		echo "0" > $j/queue/iostats
-	fi
-	if [ -e $j/queue/nr_requests ]; then
-		echo "1024" > $j/queue/nr_requests
-	fi
-	if [ -e $j/queue/read_ahead_kb ]; then
-		echo "2048" > $j/queue/read_ahead_kb
-	fi
-	if [ -e $j/bdi/read_ahead_kb ]; then
-		echo "2048" > $j/bdi/read_ahead_kb
-        fi
-done
-
-echo "2048" > /sys/devices/virtual/bdi/179:0/read_ahead_kb
-
-sleep 0.5s
-
-sync
 
 stop thermal-engine
 /system/xbin/busybox run-parts /system/etc/init.d
@@ -263,11 +222,6 @@ sleep 0.5s
 
 sync
 
-# Disable Dynamic FSync
-chmod 0777 /sys/kernel/dyn_fsync/Dyn_fsync_active
-echo "0" > /sys/kernel/dyn_fsync/Dyn_fsync_active
-chmod 0664 /sys/kernel/dyn_fsync/Dyn_fsync_active
-
 # Disable Simple GPU Algorithm
 chmod 0777 /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
 echo "0" > /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate
@@ -278,22 +232,10 @@ chmod 0777 /sys/module/adreno_idler/parameters/adreno_idler_active
 echo "1" > /sys/module/adreno_idler/parameters/adreno_idler_active
 chmod 0664 /sys/module/adreno_idler/parameters/adreno_idler_active
 
-# Disable State Notifier
-chmod 0777 /sys/module/state_notifier/parameters/enabled
-echo "0" > /sys/module/state_notifier/parameters/enabled
-chmod 0664 /sys/module/state_notifier/parameters/enabled
-
 # Enable adaptive lmk
 chmod 0777 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 echo "1" > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 chmod 0664 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-
-# Debug level
-if [ -e /sys/module/lowmemorykiller/parameters/debug_level ]; then
-    chmod 0777 /sys/module/lowmemorykiller/parameters/debug_level
-    echo "0" > /sys/module/lowmemorykiller/parameters/debug_level
-    chmod 0644 /sys/module/lowmemorykiller/parameters/debug_level
-  fi
 
 sleep 0.5s
 
